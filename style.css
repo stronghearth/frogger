@@ -1,3 +1,23 @@
+header {
+    text-align: center;
+}
+
+h1 {
+    font-family: 'MuseoModerno', cursive;
+}
+
+h2 {
+    font-family: 'Roboto', sans-serif;
+}
+
+.gameSpace {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+
 .grid {
     border: 1px solid;
     display: flex;
