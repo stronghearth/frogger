@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeLeft = document.querySelector('#time-left')
     const result = document.querySelector('#result')
     const startBtn = document.querySelector('#button')
-    const carsLeft = document.querySelector('.car-left')
-    const carsRight = document.querySelector('.car-right')
-    const logsLeft = document.querySelector('.log-left')
-    const logsRight = document.querySelector('.log-right')
+    const carsLeft = document.querySelectorAll('.car-left')
+    const carsRight = document.querySelectorAll('.car-right')
+    const logsLeft = document.querySelectorAll('.log-left')
+    const logsRight = document.querySelectorAll('.log-right')
 
     const width = 9
     let currentIndex = 76
@@ -160,4 +160,43 @@ document.addEventListener('DOMContentLoaded', () => {
             document.removeEventListener('keyup', moveFrog)
         }
     }
+
+    //move the frog while on log moving left
+    function moveWithLogLeft() {
+        if(currentIndex >= 27 && currentIndex < 35) {
+            squares[currentIndex].classList.remove('frog')
+            currentIndex += 1
+            squares[currentIndex].classList.add('frog')
+        }
+    }
+
+    //move the frog while on log moving right
+    function moveWithLogRight() {
+        if(currentIndex >= 18 && currentIndex <= 26) {
+            squares[currentIndex].classList.remove('frog')
+            currentIndex += 1
+            squares[currentIndex].classList.add('frog')
+        }
+    }
+
+    //all the functions that move pieces
+    function movePieces() {
+        currentTime --
+        timeLeft.textContent = currentTime
+        autoMoveCars()
+        autoMoveLogs()
+        moveWithLogLeft()
+        moveWithLogRight()
+        lose()
+    }
+
+    //to start and pause the game
+    startBtn.addEventListener('click', () => {
+        if(timerId) {
+            clearInterval(timerId)
+        } else {
+            timerId = setInterval(movePieces, 1000)
+            document.addEventListener('keyup', moveFrog)
+        }
+    })
 })
